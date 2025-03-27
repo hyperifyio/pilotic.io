@@ -2,10 +2,10 @@
     /* Colors */
     --primary-color: #2C7A7B;
     --accent-color: #2B6CB0;
-    --text-primary: #2D3748;
+    --text-primary: #1A202C;
     --text-secondary: #4A5568;
-    --bg-primary: #FFFFFF;
-    --bg-secondary: #F7FAFC;
+    --bg-primary: #F8FAFC;
+    --bg-secondary: #EDF2F7;
     --card-bg: #FFFFFF;
     --border-color: #E2E8F0;
     --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
@@ -127,11 +127,30 @@ p {
 }
 
 .logo a {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--text-primary);
     text-decoration: none;
-    transition: color var(--transition-fast);
+    transition: opacity var(--transition-fast);
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    height: 50px;
+    width: auto;
+}
+
+.logo-dark {
+    display: none;
+}
+
+/* Dark mode logo switching */
+@media (prefers-color-scheme: dark) {
+    .logo-light {
+        display: none;
+    }
+    
+    .logo-dark {
+        display: block;
+    }
 }
 
 .logo .io {
@@ -277,16 +296,32 @@ p {
     text-decoration: none;
     transition: all var(--transition-fast);
     font-size: 0.9375rem;
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--text-secondary);
     color: var(--text-primary);
     min-width: 120px;
     white-space: nowrap;
+    background-color: transparent;
 }
 
 .secondary-cta:hover {
     border-color: var(--primary-color);
     color: var(--primary-color);
     transform: translateY(-1px);
+    background-color: rgba(44, 122, 123, 0.05);
+}
+
+/* Update dark mode styles for secondary button */
+@media (prefers-color-scheme: dark) {
+    .secondary-cta {
+        border-color: var(--text-secondary);
+        color: var(--text-primary);
+    }
+    
+    .secondary-cta:hover {
+        border-color: var(--primary-color);
+        color: var(--primary-color);
+        background-color: rgba(44, 122, 123, 0.1);
+    }
 }
 
 .hero-stats {
