@@ -195,4 +195,101 @@ tooltips.forEach(tooltip => {
             tooltipElement.remove();
         }
     });
+});
+
+// Quote rotation functionality
+const vibeQuotes = {
+    planning: [
+        "This task is radiating strong ‘ask me again tomorrow’ vibes.",
+        "Feels like a ‘we'll cross that bridge when Mercury exits retrograde’ type of task.",
+        "The backlog just whispered it wants a long weekend.",
+        "Sprint mood check: Feels more like a sprint nap.",
+        "This feature is definitely more of a ‘second coffee’ project."
+    ],
+    coding: [
+        "Warning: The servers just joined a meditation retreat—expect slow responses.",
+        "Code freeze initiated because Jupiter looked stressed this morning.",
+        "The codebase confessed it’s having an identity crisis—recommending therapy.",
+        "Urgency detected, but honestly, it's probably just low blood sugar.",
+        "High levels of technical debt vibes detected—time for a spiritual refactoring."
+    ],
+    review: [
+        "This PR is giving strong ‘I wrote this at 2 AM’ vibes—proceed with compassion.",
+        "Merge conflicts spotted—but let's approach them with gentle encouragement.",
+        "This code review needs less Monday and more Friday energy.",
+        "Backend API chakra alignment complete—proceed to merge.",
+        "The pull request feels emotionally balanced but slightly caffeinated."
+    ],
+    features: [
+        "The database just texted: 'Feeling drained, send help.'",
+        "High procrastination energy alert—time to brew more coffee.",
+        "Deployment pipeline experiencing existential dread—consider emotional healing.",
+        "Chakra imbalance in authentication flow detected—recommend sage smudging.",
+        "Team anxiety spike detected—initiating group meditation before deployment."
+    ]
+};
+
+function rotateQuotes() {
+    // Rotate planning quotes
+    const planningQuotes = document.querySelectorAll('.vibe-process-step:nth-child(1) .vibe-example p');
+    planningQuotes.forEach(quote => {
+        quote.textContent = vibeQuotes.planning[Math.floor(Math.random() * vibeQuotes.planning.length)];
+    });
+
+    // Rotate coding quotes
+    const codingQuotes = document.querySelectorAll('.vibe-process-step:nth-child(2) .vibe-example p');
+    codingQuotes.forEach(quote => {
+        quote.textContent = vibeQuotes.coding[Math.floor(Math.random() * vibeQuotes.coding.length)];
+    });
+
+    // Rotate review quotes
+    const reviewQuotes = document.querySelectorAll('.vibe-process-step:nth-child(3) .vibe-example p');
+    reviewQuotes.forEach(quote => {
+        quote.textContent = vibeQuotes.review[Math.floor(Math.random() * vibeQuotes.review.length)];
+    });
+
+    // Rotate feature quotes
+    const featureQuotes = document.querySelectorAll('.vibe-feature .vibe-example p');
+    featureQuotes.forEach(quote => {
+        quote.textContent = vibeQuotes.features[Math.floor(Math.random() * vibeQuotes.features.length)];
+    });
+}
+
+// Initialize quote rotation
+document.addEventListener('DOMContentLoaded', () => {
+    // Initial rotation
+    rotateQuotes();
+
+    // Rotate quotes every 5 seconds
+    setInterval(rotateQuotes, 5000);
+});
+
+// Mobile menu toggle
+document.addEventListener('DOMContentLoaded', () => {
+    const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+    const navLinks = document.querySelector('.nav-links');
+
+    if (mobileMenuToggle && navLinks) {
+        mobileMenuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+    }
+});
+
+// Sticky CTA bar
+document.addEventListener('DOMContentLoaded', () => {
+    const stickyCTA = document.querySelector('.sticky-cta');
+    let lastScroll = 0;
+
+    window.addEventListener('scroll', () => {
+        const currentScroll = window.pageYOffset;
+        
+        if (currentScroll > lastScroll && currentScroll > 300) {
+            stickyCTA.classList.add('visible');
+        } else {
+            stickyCTA.classList.remove('visible');
+        }
+        
+        lastScroll = currentScroll;
+    });
 }); 
