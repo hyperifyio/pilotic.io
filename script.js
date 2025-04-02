@@ -366,5 +366,14 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Save preference
         localStorage.setItem('vibeMode', isSerious ? 'humorous' : 'serious');
+        
+        // Smooth scroll to the top of the vibe-promo section
+        const vibePromoSection = document.getElementById('vibe-promo');
+        if (vibePromoSection) {
+            vibePromoSection.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
     }
 }); 
