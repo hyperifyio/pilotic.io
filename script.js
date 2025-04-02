@@ -303,6 +303,10 @@ document.addEventListener('DOMContentLoaded', function() {
     const humorousDisclaimer = document.querySelector('.humorous-disclaimer');
     const seriousDisclaimer = document.querySelector('.serious-disclaimer');
 
+    // Hide serious mode by default
+    seriousMode.style.display = 'none';
+    seriousDisclaimer.style.display = 'none';
+
     const seriousDisclaimers = [
         "10x your output. Deadlines become checkpoints—not pressure points.",
         "Pilotic helps you ship faster, without chasing deadlines or burning out.",
@@ -319,6 +323,9 @@ document.addEventListener('DOMContentLoaded', function() {
     if (savedMode === 'serious') {
         toggleMode();
     }
+
+    // Track if this is the first toggle
+    let isFirstToggle = true;
 
     toggleButton.addEventListener('click', toggleMode);
 
@@ -337,9 +344,14 @@ document.addEventListener('DOMContentLoaded', function() {
         humorousDisclaimer.style.display = isSerious ? 'block' : 'none';
         seriousDisclaimer.style.display = isSerious ? 'none' : 'block';
         
-        // Always get a new random disclaimer when switching to serious mode
+        // Show April Fool's message on first toggle to serious mode, then random messages
         if (!isSerious) {
-            seriousDisclaimer.textContent = getRandomDisclaimer();
+            if (isFirstToggle) {
+                seriousDisclaimer.textContent = "Happy April Fool's Day! While we love a good joke, our real product is much more powerful. 🎉";
+                isFirstToggle = false;
+            } else {
+                seriousDisclaimer.textContent = getRandomDisclaimer();
+            }
         }
         
         // Save preference
