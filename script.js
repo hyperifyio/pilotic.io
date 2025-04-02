@@ -296,12 +296,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Vibe Mode Toggle Functionality
 document.addEventListener('DOMContentLoaded', function() {
+    // Track if this is the first toggle
+    let isFirstToggle = true;
+
     const toggleButton = document.querySelector('.vibe-mode-toggle');
     const humorousMode = document.querySelector('.humorous-mode');
     const seriousMode = document.querySelector('.serious-mode');
     const toggleText = toggleButton.querySelector('.toggle-text');
     const humorousDisclaimer = document.querySelector('.humorous-disclaimer');
     const seriousDisclaimer = document.querySelector('.serious-disclaimer');
+    const vibeBadge = document.querySelector('.vibe-badge');
 
     // Hide serious mode by default
     seriousMode.style.display = 'none';
@@ -324,9 +328,6 @@ document.addEventListener('DOMContentLoaded', function() {
         toggleMode();
     }
 
-    // Track if this is the first toggle
-    let isFirstToggle = true;
-
     toggleButton.addEventListener('click', toggleMode);
 
     function toggleMode() {
@@ -339,6 +340,9 @@ document.addEventListener('DOMContentLoaded', function() {
         // Update button state
         toggleButton.classList.toggle('serious-mode');
         toggleText.textContent = isSerious ? '😂 Joke aside, let\'s be serious' : '😊 Back to fun mode';
+        
+        // Update badge text
+        vibeBadge.textContent = isSerious ? 'April Fool\'s 2025' : 'New Feature';
         
         // Update disclaimers
         humorousDisclaimer.style.display = isSerious ? 'block' : 'none';
