@@ -1708,4 +1708,57 @@ section h2::after {
     .vibe-process-step p {
         font-size: 1rem;
     }
+}
+
+.vibe-mode {
+    transition: opacity 0.3s ease-in-out;
+}
+
+.vibe-mode.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.vibe-mode-toggle {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: #fff;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--radius-lg);
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    margin: var(--space-lg) 0;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+}
+
+.vibe-mode-toggle:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.vibe-mode-toggle .toggle-text {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.vibe-mode-toggle.serious-mode .toggle-text::before {
+    content: "😊";
+    font-size: 1.2em;
+}
+
+.vibe-mode-toggle.serious-mode .toggle-text {
+    content: "Back to fun mode";
+}
+
+@media (max-width: 480px) {
+    .vibe-mode-toggle {
+        padding: 0.5rem 1rem;
+        font-size: 0.875rem;
+    }
 } 

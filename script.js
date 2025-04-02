@@ -200,21 +200,21 @@ tooltips.forEach(tooltip => {
 // Quote rotation functionality
 const vibeQuotes = {
     planning: [
-        "This task is radiating strong ‘ask me again tomorrow’ vibes.",
-        "Feels like a ‘we'll cross that bridge when Mercury exits retrograde’ type of task.",
+        "This task is radiating strong 'ask me again tomorrow' vibes.",
+        "Feels like a 'we'll cross that bridge when Mercury exits retrograde' type of task.",
         "The backlog just whispered it wants a long weekend.",
         "Sprint mood check: Feels more like a sprint nap.",
-        "This feature is definitely more of a ‘second coffee’ project."
+        "This feature is definitely more of a 'second coffee' project."
     ],
     coding: [
         "Warning: The servers just joined a meditation retreat—expect slow responses.",
         "Code freeze initiated because Jupiter looked stressed this morning.",
-        "The codebase confessed it’s having an identity crisis—recommending therapy.",
+        "The codebase confessed it's having an identity crisis—recommending therapy.",
         "Urgency detected, but honestly, it's probably just low blood sugar.",
         "High levels of technical debt vibes detected—time for a spiritual refactoring."
     ],
     review: [
-        "This PR is giving strong ‘I wrote this at 2 AM’ vibes—proceed with compassion.",
+        "This PR is giving strong 'I wrote this at 2 AM' vibes—proceed with compassion.",
         "Merge conflicts spotted—but let's approach them with gentle encouragement.",
         "This code review needs less Monday and more Friday energy.",
         "Backend API chakra alignment complete—proceed to merge.",
@@ -292,4 +292,57 @@ document.addEventListener('DOMContentLoaded', () => {
         
         lastScroll = currentScroll;
     });
+});
+
+// Vibe Mode Toggle Functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const toggleButton = document.querySelector('.vibe-mode-toggle');
+    const humorousMode = document.querySelector('.humorous-mode');
+    const seriousMode = document.querySelector('.serious-mode');
+    const toggleText = toggleButton.querySelector('.toggle-text');
+    const humorousDisclaimer = document.querySelector('.humorous-disclaimer');
+    const seriousDisclaimer = document.querySelector('.serious-disclaimer');
+
+    const seriousDisclaimers = [
+        "10x your output. Deadlines become checkpoints—not pressure points.",
+        "Pilotic helps you ship faster, without chasing deadlines or burning out.",
+        "Consistent delivery without deadline anxiety. Work flows. Output scales.",
+        "Fueled by clarity, not caffeine. And no, deadlines were not harmed."
+    ];
+
+    function getRandomDisclaimer() {
+        return seriousDisclaimers[Math.floor(Math.random() * seriousDisclaimers.length)];
+    }
+
+    // Check for saved preference
+    const savedMode = localStorage.getItem('vibeMode');
+    if (savedMode === 'serious') {
+        toggleMode();
+    }
+
+    toggleButton.addEventListener('click', toggleMode);
+
+    function toggleMode() {
+        const isSerious = humorousMode.style.display === 'none';
+        
+        // Toggle display
+        humorousMode.style.display = isSerious ? 'block' : 'none';
+        seriousMode.style.display = isSerious ? 'none' : 'block';
+        
+        // Update button state
+        toggleButton.classList.toggle('serious-mode');
+        toggleText.textContent = isSerious ? '😂 Joke aside, let\'s be serious' : '😊 Back to fun mode';
+        
+        // Update disclaimers
+        humorousDisclaimer.style.display = isSerious ? 'block' : 'none';
+        seriousDisclaimer.style.display = isSerious ? 'none' : 'block';
+        
+        // Always get a new random disclaimer when switching to serious mode
+        if (!isSerious) {
+            seriousDisclaimer.textContent = getRandomDisclaimer();
+        }
+        
+        // Save preference
+        localStorage.setItem('vibeMode', isSerious ? 'humorous' : 'serious');
+    }
 }); 
