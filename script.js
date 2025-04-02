@@ -5,54 +5,60 @@ const header = document.querySelector('.site-header');
 const stickyCta = document.querySelector('.sticky-cta');
 
 // Toggle mobile menu
-mobileMenuToggle.addEventListener('click', () => {
-    navLinks.classList.toggle('active');
-    mobileMenuToggle.setAttribute('aria-expanded', 
-        mobileMenuToggle.getAttribute('aria-expanded') === 'true' ? 'false' : 'true'
-    );
-});
+if (mobileMenuToggle && navLinks) {
+    mobileMenuToggle.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+        mobileMenuToggle.setAttribute('aria-expanded', 
+            mobileMenuToggle.getAttribute('aria-expanded') === 'true' ? 'false' : 'true'
+        );
+    });
+}
 
 // Close mobile menu when clicking outside
 document.addEventListener('click', (e) => {
-    if (!header.contains(e.target) && navLinks.classList.contains('active')) {
+    if (header && navLinks && !header.contains(e.target) && navLinks.classList.contains('active')) {
         navLinks.classList.remove('active');
         mobileMenuToggle.setAttribute('aria-expanded', 'false');
     }
 });
 
 // Close mobile menu when clicking a link
-navLinks.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => {
-        navLinks.classList.remove('active');
-        mobileMenuToggle.setAttribute('aria-expanded', 'false');
+if (navLinks) {
+    navLinks.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            navLinks.classList.remove('active');
+            mobileMenuToggle.setAttribute('aria-expanded', 'false');
+        });
     });
-});
+}
 
 // Handle sticky CTA visibility
 let lastScrollTop = 0;
 const scrollThreshold = 100;
 const stickyCTA = document.querySelector('.sticky-cta');
 
-window.addEventListener('scroll', () => {
-    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    const scrollDirection = scrollTop > lastScrollTop ? 'down' : 'up';
-    
-    // Show CTA after scrolling past threshold
-    if (scrollTop > scrollThreshold) {
-        stickyCTA.classList.add('visible');
-    } else {
-        stickyCTA.classList.remove('visible');
-    }
-    
-    // Hide CTA when scrolling down, show when scrolling up
-    if (scrollDirection === 'down' && scrollTop > scrollThreshold) {
-        stickyCTA.classList.remove('visible');
-    } else if (scrollDirection === 'up') {
-        stickyCTA.classList.add('visible');
-    }
-    
-    lastScrollTop = scrollTop;
-});
+if (stickyCTA) {
+    window.addEventListener('scroll', () => {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const scrollDirection = scrollTop > lastScrollTop ? 'down' : 'up';
+        
+        // Show CTA after scrolling past threshold
+        if (scrollTop > scrollThreshold) {
+            stickyCTA.classList.add('visible');
+        } else {
+            stickyCTA.classList.remove('visible');
+        }
+        
+        // Hide CTA when scrolling down, show when scrolling up
+        if (scrollDirection === 'down' && scrollTop > scrollThreshold) {
+            stickyCTA.classList.remove('visible');
+        } else if (scrollDirection === 'up') {
+            stickyCTA.classList.add('visible');
+        }
+        
+        lastScrollTop = scrollTop;
+    });
+}
 
 // Smooth scroll for anchor links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
